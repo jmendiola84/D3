@@ -39,7 +39,7 @@ d3.csv("data/data.csv", function(err, censusData) {
   // Step 2: Create scale functions
   // ==============================
   var xLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(censusData, d => d.poverty)])
+    .domain([8, d3.max(censusData, d => d.poverty)])
     .range([0, width]);
 
   var yLinearScale = d3.scaleLinear()
@@ -78,7 +78,7 @@ d3.csv("data/data.csv", function(err, censusData) {
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.abbr}<br>Poverty: ${d.poverty}<br>Cannot Pay Doctor: ${d.cannotPayDoctor}`);
+      return (`${d.state}<br>Poverty: ${d.poverty}%<br>Cannot Pay Doctor: ${d.cannotPayDoctor}%`);
     });
 
   // Step 7: Create tooltip in the chart
@@ -102,7 +102,7 @@ d3.csv("data/data.csv", function(err, censusData) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .attr("class", "axisText")
-    .text("Percent of people who could not pay for a doctor in the last 12 months");
+    .text("People who cannot afford a doctor appointment (%)");
 
   chartGroup.append("text")
     .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
