@@ -68,9 +68,29 @@ d3.csv("data/data.csv", function(err, censusData) {
   .append("circle")
   .attr("cx", d => xLinearScale(d.poverty))
   .attr("cy", d => yLinearScale(d.cannotPayDoctor))
-  .attr("r", "5")
-  .attr("fill", "blue")
+  .attr("r", "12")
+  .attr("fill", "teal")
   .attr("opacity", ".5");
+  
+  chartGroup.append("text")
+        .style("text-anchor", "middle")
+        .style("font-size", "10px")
+        .style("font-weight", "bold")
+        .style("font-family", "sans-serif")
+		.style('fill', 'white')
+        .selectAll("tspan")
+        .data(censusData)
+        .enter()
+        .append("tspan")
+            .attr("x", function(d) {
+                return xLinearScale(d.poverty - 0);
+            })
+            .attr("y", function(d) {
+                return yLinearScale(d.cannotPayDoctor - 0.2);
+            })
+            .text(function(d) {
+                return d.abbr
+            });
 
   // Step 6: Initialize tool tip
   // ==============================
@@ -87,7 +107,7 @@ d3.csv("data/data.csv", function(err, censusData) {
 
   // Step 8: Create event listeners to display and hide the tooltip
   // ==============================
-  circlesGroup.on("click", function(data) {
+  circlesGroup.on("mouseover", function(data) {
     toolTip.show(data);
   })
     // onmouseout event
@@ -102,10 +122,10 @@ d3.csv("data/data.csv", function(err, censusData) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .attr("class", "axisText")
-    .text("People who cannot afford a doctor appointment (%)");
+    .text("Cannot pay doctor appointment (%)");
 
   chartGroup.append("text")
     .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
     .attr("class", "axisText")
-    .text("Percent of people living below poverty line");
+    .text("People living below poverty line (%)");
 });

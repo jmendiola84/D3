@@ -1,12 +1,29 @@
 .iframeContainer {
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #e3e3e3;
 }
+
+.article {
+	padding: 20px;
+    font-weight: bold;
+}
+
+.jumbotron {
+  background-color: #ffffff;
+}
+
 
 /* Sticky Footer rules (https://getbootstrap.com/examples/sticky-footer/) */
 html {
   position: relative;
   min-height: 100%;
+}
+
+h1 {
+	font-size: 100 px;
+	font-family: "Georgia", Times, serif;
+	text-align: center;
+    font-weight: bold;
 }
 
 body {
